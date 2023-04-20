@@ -1,1 +1,0 @@
-[{"email":"abdullah16aug@gmail.com","password":"passowrd","admin":true},{"name":"asad","email":"asadrais@rediffmail.com","password":"1234"}]

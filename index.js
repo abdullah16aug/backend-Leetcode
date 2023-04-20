@@ -2,8 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = 3001;
-// const USERS = require("./UsersDb.js").USERS;
-const fs = require("fs");
+
 
 
 app.use(express.json());
@@ -49,33 +48,37 @@ let password=req.body.password;
  
  
 });
-
+app.get('',(req,res)=>{
+  res.send('backend')
+})
 app.post("/login", function (req, res) {
   // Add logic to decode body
   // body should have email and password
-  let email = req.body.email;
-  let password = req.body.password;
-  console.log(email, password);
+  let femail = req.body.email;
+  let fpassword = req.body.password;
+  console.log(femail, fpassword);
   // Check if the user with the given email exists in the USERS array
   // Also ensure that the password is the same
   USERS.forEach((user) => {
 
-    if (user.email == email && user.password == password) {
+    if (user.email === femail && user.password === fpassword) {
         // If the password is the same, return back 200 status code to the client
         // Also send back a token (any random string will do for now)
         return res.status(200).json({token:'randomStringToken'});
     } 
       // If the password is not the same, return back 401 status code to the client
       else {
-      res.status(401).json("Login Failed");
+     return res.status(401).json({token:"Login Failed"});
     }
   });
-  res.json("Hello World from route 2!");
+  // res.json("Hello World from route 2!");
 });
 
 app.get("/questions", function (req, res) {
   //return the user all the questions in the QUESTIONS array
-  res.send("Hello World from route 3!");
+  console.log(QUESTIONS)
+  res.json(QUESTIONS)
+  res.send({message:"Hello World from route 3!"});
 });
 
 app.get("/submissions", function (req, res) {
